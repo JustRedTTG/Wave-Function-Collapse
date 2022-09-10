@@ -7,7 +7,7 @@ import checks
 
 # Initiate the display
 DDIM = 700
-display_width, display_height = DIM, DIM
+display_width, display_height = DDIM, DDIM
 pe.init()
 pe.display.make((display_width, display_height), "Wave Function Collapse")
 
@@ -29,7 +29,7 @@ B=3
 
 # Tiles
 tiles = [
-    TileObject(load_image("tiles/0.png"), [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0],),
+    #TileObject(load_image("tiles/0.png"), [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0],),
     # Green
     TileObject(load_image("tiles/1.png"), [0, G, 0], [0, G, 0], [0, 0, 0], [0, G, 0],),
     TileObject(load_image("tiles/2.png"), [0, G, 0], [0, G, 0], [0, G, 0], [0, 0, 0],),
