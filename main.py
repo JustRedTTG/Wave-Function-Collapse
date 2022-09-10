@@ -6,7 +6,8 @@ import random
 import checks
 
 # Initiate the display
-display_width, display_height = 700, 700
+DDIM = 700
+display_width, display_height = DIM, DIM
 pe.init()
 pe.display.make((display_width, display_height), "Wave Function Collapse")
 
@@ -14,7 +15,7 @@ pe.display.make((display_width, display_height), "Wave Function Collapse")
 log = Logger()
 
 # Initiate the grid
-DIM = 20
+DIM = 100
 grid_width, grid_height = DIM, DIM
 grid = Grid(grid_width, grid_height)
 
@@ -22,17 +23,85 @@ grid = Grid(grid_width, grid_height)
 def load_image(file):
     return pe.Image(file, (display_width / grid_width, display_height / grid_height))
 
+R=1
+G=2
+B=3
 
 # Tiles
 tiles = [
     TileObject(load_image("tiles/0.png"), [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0],),
-    TileObject(load_image("tiles/1.png"), [0, 1, 0], [0, 1, 0], [0, 0, 0], [0, 1, 0],),
-    TileObject(load_image("tiles/2.png"), [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 0, 0],),
-    TileObject(load_image("tiles/3.png"), [0, 0, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0],),
-    TileObject(load_image("tiles/4.png"), [0, 1, 0], [0, 0, 0], [0, 1, 0], [0, 1, 0],),
-    TileObject(load_image("tiles/5.png"), [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0],),
-    TileObject(load_image("tiles/6.png"), [0, 0, 0], [0, 1, 0], [0, 0, 0], [0, 1, 0],),
-    TileObject(load_image("tiles/7.png"), [0, 1, 0], [0, 0, 0], [0, 1, 0], [0, 0, 0],),
+    # Green
+    TileObject(load_image("tiles/1.png"), [0, G, 0], [0, G, 0], [0, 0, 0], [0, G, 0],),
+    TileObject(load_image("tiles/2.png"), [0, G, 0], [0, G, 0], [0, G, 0], [0, 0, 0],),
+    TileObject(load_image("tiles/3.png"), [0, 0, 0], [0, G, 0], [0, G, 0], [0, G, 0],),
+    TileObject(load_image("tiles/4.png"), [0, G, 0], [0, 0, 0], [0, G, 0], [0, G, 0],),
+    TileObject(load_image("tiles/5.png"), [0, G, 0], [0, G, 0], [0, G, 0], [0, G, 0],),
+    TileObject(load_image("tiles/6.png"), [0, 0, 0], [0, G, 0], [0, 0, 0], [0, G, 0],),
+    TileObject(load_image("tiles/7.png"), [0, G, 0], [0, 0, 0], [0, G, 0], [0, 0, 0],),
+    # Green to blue
+    TileObject(load_image("tiles/8.png"), [0, B, 0], [0, B, 0], [0, 0, 0], [0, G, 0],),
+    TileObject(load_image("tiles/9.png"), [0, B, 0], [0, B, 0], [0, G, 0], [0, 0, 0],),
+    TileObject(load_image("tiles/10.png"), [0, 0, 0], [0, G, 0], [0, B, 0], [0, B, 0],),
+    TileObject(load_image("tiles/11.png"), [0, B, 0], [0, 0, 0], [0, G, 0], [0, B, 0],),
+    TileObject(load_image("tiles/12.png"), [0, B, 0], [0, B, 0], [0, G, 0], [0, G, 0],),
+    TileObject(load_image("tiles/13.png"), [0, 0, 0], [0, G, 0], [0, 0, 0], [0, B, 0],),
+    TileObject(load_image("tiles/14.png"), [0, B, 0], [0, 0, 0], [0, G, 0], [0, 0, 0],),
+    # Green to red
+    TileObject(load_image("tiles/15.png"), [0, R, 0], [0, R, 0], [0, 0, 0], [0, G, 0],),
+    TileObject(load_image("tiles/16.png"), [0, R, 0], [0, R, 0], [0, G, 0], [0, 0, 0],),
+    TileObject(load_image("tiles/17.png"), [0, 0, 0], [0, G, 0], [0, R, 0], [0, R, 0],),
+    TileObject(load_image("tiles/18.png"), [0, R, 0], [0, 0, 0], [0, G, 0], [0, R, 0],),
+    TileObject(load_image("tiles/19.png"), [0, R, 0], [0, R, 0], [0, G, 0], [0, G, 0],),
+    TileObject(load_image("tiles/20.png"), [0, 0, 0], [0, G, 0], [0, 0, 0], [0, R, 0],),
+    TileObject(load_image("tiles/21.png"), [0, R, 0], [0, 0, 0], [0, G, 0], [0, 0, 0],),
+    # Red
+    TileObject(load_image("tiles/22.png"), [0, R, 0], [0, R, 0], [0, 0, 0], [0, R, 0],),
+    TileObject(load_image("tiles/23.png"), [0, R, 0], [0, R, 0], [0, R, 0], [0, 0, 0],),
+    TileObject(load_image("tiles/24.png"), [0, 0, 0], [0, R, 0], [0, R, 0], [0, R, 0],),
+    TileObject(load_image("tiles/25.png"), [0, R, 0], [0, 0, 0], [0, R, 0], [0, R, 0],),
+    TileObject(load_image("tiles/26.png"), [0, R, 0], [0, R, 0], [0, R, 0], [0, R, 0],),
+    TileObject(load_image("tiles/27.png"), [0, 0, 0], [0, R, 0], [0, 0, 0], [0, R, 0],),
+    TileObject(load_image("tiles/28.png"), [0, R, 0], [0, 0, 0], [0, R, 0], [0, 0, 0],),
+    # Red to blue
+    TileObject(load_image("tiles/29.png"), [0, B, 0], [0, B, 0], [0, 0, 0], [0, R, 0],),
+    TileObject(load_image("tiles/30.png"), [0, B, 0], [0, B, 0], [0, R, 0], [0, 0, 0],),
+    TileObject(load_image("tiles/31.png"), [0, 0, 0], [0, R, 0], [0, B, 0], [0, B, 0],),
+    TileObject(load_image("tiles/32.png"), [0, B, 0], [0, 0, 0], [0, R, 0], [0, B, 0],),
+    TileObject(load_image("tiles/33.png"), [0, B, 0], [0, B, 0], [0, R, 0], [0, R, 0],),
+    TileObject(load_image("tiles/34.png"), [0, 0, 0], [0, R, 0], [0, 0, 0], [0, B, 0],),
+    TileObject(load_image("tiles/35.png"), [0, B, 0], [0, 0, 0], [0, R, 0], [0, 0, 0],),
+    # Red to green
+    TileObject(load_image("tiles/36.png"), [0, G, 0], [0, G, 0], [0, 0, 0], [0, R, 0],),
+    TileObject(load_image("tiles/37.png"), [0, G, 0], [0, G, 0], [0, R, 0], [0, 0, 0],),
+    TileObject(load_image("tiles/38.png"), [0, 0, 0], [0, R, 0], [0, G, 0], [0, G, 0],),
+    TileObject(load_image("tiles/39.png"), [0, G, 0], [0, 0, 0], [0, R, 0], [0, G, 0],),
+    TileObject(load_image("tiles/40.png"), [0, G, 0], [0, G, 0], [0, R, 0], [0, R, 0],),
+    TileObject(load_image("tiles/41.png"), [0, 0, 0], [0, R, 0], [0, 0, 0], [0, G, 0],),
+    TileObject(load_image("tiles/42.png"), [0, G, 0], [0, 0, 0], [0, R, 0], [0, 0, 0],),
+    # Blue
+    TileObject(load_image("tiles/43.png"), [0, B, 0], [0, B, 0], [0, 0, 0], [0, B, 0],),
+    TileObject(load_image("tiles/44.png"), [0, B, 0], [0, B, 0], [0, B, 0], [0, 0, 0],),
+    TileObject(load_image("tiles/45.png"), [0, 0, 0], [0, B, 0], [0, B, 0], [0, B, 0],),
+    TileObject(load_image("tiles/46.png"), [0, B, 0], [0, 0, 0], [0, B, 0], [0, B, 0],),
+    TileObject(load_image("tiles/47.png"), [0, B, 0], [0, B, 0], [0, B, 0], [0, B, 0],),
+    TileObject(load_image("tiles/48.png"), [0, 0, 0], [0, B, 0], [0, 0, 0], [0, B, 0],),
+    TileObject(load_image("tiles/49.png"), [0, B, 0], [0, 0, 0], [0, B, 0], [0, 0, 0],),
+    # Blue to red
+    TileObject(load_image("tiles/50.png"), [0, R, 0], [0, R, 0], [0, 0, 0], [0, B, 0],),
+    TileObject(load_image("tiles/51.png"), [0, R, 0], [0, R, 0], [0, B, 0], [0, 0, 0],),
+    TileObject(load_image("tiles/52.png"), [0, 0, 0], [0, B, 0], [0, R, 0], [0, R, 0],),
+    TileObject(load_image("tiles/53.png"), [0, R, 0], [0, 0, 0], [0, B, 0], [0, R, 0],),
+    TileObject(load_image("tiles/54.png"), [0, R, 0], [0, R, 0], [0, B, 0], [0, B, 0],),
+    TileObject(load_image("tiles/55.png"), [0, 0, 0], [0, B, 0], [0, 0, 0], [0, R, 0],),
+    TileObject(load_image("tiles/56.png"), [0, R, 0], [0, 0, 0], [0, B, 0], [0, 0, 0],),
+    # Blue to green
+    TileObject(load_image("tiles/57.png"), [0, G, 0], [0, G, 0], [0, 0, 0], [0, B, 0],),
+    TileObject(load_image("tiles/58.png"), [0, G, 0], [0, G, 0], [0, B, 0], [0, 0, 0],),
+    TileObject(load_image("tiles/59.png"), [0, 0, 0], [0, B, 0], [0, G, 0], [0, G, 0],),
+    TileObject(load_image("tiles/60.png"), [0, G, 0], [0, 0, 0], [0, B, 0], [0, G, 0],),
+    TileObject(load_image("tiles/61.png"), [0, G, 0], [0, G, 0], [0, B, 0], [0, B, 0],),
+    TileObject(load_image("tiles/62.png"), [0, 0, 0], [0, B, 0], [0, 0, 0], [0, G, 0],),
+    TileObject(load_image("tiles/63.png"), [0, G, 0], [0, 0, 0], [0, B, 0], [0, 0, 0],),
 ]
 checks.tiles = tiles
 
@@ -81,11 +150,9 @@ def collapse():
     pick_smallest_value = len(grid_copy[0].value.options)
     smallest = list(filter(pick_smallest, grid_copy))
     if len(smallest) < 1:
-        print("Couldn't find any:", smallest, readable(list(filter(pick_not_collapsed, grid_copy))))
         return
     pick = random.choice(smallest)
     pick.value.collapsed = True
-    print(pick.value.options)
 
     left = pick.left()
     right = pick.right()
@@ -107,31 +174,29 @@ def collapse():
         pick.value.options = [random.choice(pick.value.options)]
     else:
         pick.value.options = [0]
-
+    tiles[pick.value.options[0]].image.display(calculate_area(pick.x, pick.y))
 
 
 was_pressed = False
+finished = False
+snake = None
+pe.fill.full(pe.colors.black)
 
 
 while True:
+    finished = True
     for pe.event.c in pe.event.get():
         pe.event.quitcheckauto()
-    pe.fill.full(pe.colors.black)
+
 
     for x in range(grid_width):
         for y in range(grid_height):
             obj = grid.get(x, y)
-            if obj.value.collapsed:
-                tiles[obj.value.options[0]].image.display(calculate_area(x, y))
-            else:
-                pe.draw.rect(pe.colors.white, calculate_area(x, y), 1)
+            if not obj.value.collapsed:
+                finished = False
 
-    # if pe.mouse.clicked()[0] and not was_pressed:
-    #     was_pressed = True
     collapse()
-    # elif not pe.mouse.clicked()[0]:
-    #     was_pressed = False
 
 
-    log.render()
-    pe.display.update(60)
+    #log.render()
+    pe.display.update()
