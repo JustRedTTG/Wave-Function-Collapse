@@ -15,7 +15,7 @@ pe.display.make((display_width, display_height), "Wave Function Collapse")
 log = Logger()
 
 # Initiate the grid
-DIM = 100
+DIM = 50
 grid_width, grid_height = DIM, DIM
 grid = Grid(grid_width, grid_height)
 
@@ -180,7 +180,7 @@ def collapse():
 was_pressed = False
 finished = False
 snake = None
-pe.fill.full(pe.colors.black)
+pe.fill.full(pe.colors.darkgray)
 
 
 while True:
